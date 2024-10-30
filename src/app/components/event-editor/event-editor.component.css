@@ -1,0 +1,35 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+
+  .event-editor-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .event-selector-container {
+    display: flex;
+    flex-direction: row;
+
+    .remove-button {
+      display: none;
+    }
+
+    .attributes-container {
+      display: flex;
+      flex-direction: column;
+
+      .refine-button {
+        margin: 0.5rem 1rem;
+      }
+    }
+
+    &:hover {
+      .remove-button {
+        display: inherit;
+      }
+    }
+  }
+}

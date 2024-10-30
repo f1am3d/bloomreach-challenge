@@ -1,0 +1,23 @@
+@if (selectedType() === 'string') {
+  <p-dropdown
+    filter
+    [formControl]="control().controls.symbol"
+    [options]="signs.string"
+  />
+
+  <input pInputText type="text" [formControl]="control().controls.value" />
+} @else if (selectedType() === 'number') {
+  <p-dropdown
+    filter
+    [formControl]="control().controls.symbol"
+    [options]="signs.number"
+  />
+
+  @if (control().controls.symbol.value === 'in between') {
+    <app-event-editor-attribute-params-range
+      [control]="control().controls.range"
+    />
+  } @else {
+    <input pInputText type="number" [formControl]="control().controls.value" />
+  }
+}

@@ -1,0 +1,24 @@
+<p-dropdown
+  #attributeDropdown
+  filter
+  placeholder="Select an attribute"
+  optionLabel="property"
+  optionValue="property"
+  [formControl]="control().controls.property"
+  [options]="attributeList()"
+/>
+
+@if (attributeDropdown.selectedOption?.type !== null) {
+  <app-event-editor-attribute-params
+    [control]="control()"
+    [selectedType]="attributeDropdown.selectedOption.type"
+  />
+}
+
+<p-button
+  rounded
+  text
+  class="remove-button"
+  icon="pi pi-times"
+  (click)="onRemoveButtonClick()"
+/>

@@ -1,0 +1,61 @@
+<div class="event-editor-header">
+  <h5>
+    {{ index() + 1 }}. Step "{{
+      formGroup().controls.event.value ?? 'Unnamed step'
+    }}"
+  </h5>
+
+  <p-button
+    rounded
+    text
+    class="remove-button"
+    icon="pi pi-trash"
+    severity="secondary"
+    (click)="onRemoveEventClick()"
+  />
+</div>
+
+<form [formGroup]="formGroup()">
+  <div class="event-selector-container">
+    <p-dropdown
+      #eventDropdown
+      filter
+      placeholder="Select an event"
+      optionLabel="type"
+      optionValue="type"
+      [formControl]="formGroup().controls.event"
+      [options]="eventList()"
+      (onChange)="onSelectEventType()"
+    />
+
+    @if (eventDropdown.selectedOption) {
+      @if (formGroup().controls.attributes.controls.length > 0) {
+        <div class="attributes-container">
+          @for (
+            attribute of formGroup().controls.attributes.controls;
+            track attribute
+          ) {
+            <app-event-editor-attribute
+              [control]="attribute"
+              [type]="formGroup().controls.event.value"
+              (onRemoveEvent)="removeAttribute($event)"
+            />
+          }
+
+          <p-button
+            text
+            class="refine-button"
+            label="Refine more"
+            (click)="addEventAttribute()"
+          />
+        </div>
+      } @else {
+        <p-button
+          text
+          label="+ add an event attribute"
+          (click)="addEventAttribute()"
+        />
+      }
+    }
+  </div>
+</form>

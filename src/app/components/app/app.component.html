@@ -1,0 +1,26 @@
+<p-card>
+  <div class="header">
+    <h1>Customer Filter</h1>
+    <p-button text severity="danger" (click)="discardFilters()">
+      Discard Filters
+    </p-button>
+  </div>
+
+  <div class="filters-container">
+    @for (event of formArray.controls; track $index) {
+      <app-event-editor
+        [formGroup]="event"
+        [index]="$index"
+        (onRemoveEvent)="removeEvent($event)"
+      ></app-event-editor>
+    }
+  </div>
+
+  <p-divider />
+
+  <p-button text (click)="addEvent()">+ Add funnel step</p-button>
+</p-card>
+
+<p-divider />
+
+<p-button (click)="applyFilters()"> Apply filters</p-button>
